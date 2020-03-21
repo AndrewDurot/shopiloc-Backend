@@ -1,6 +1,6 @@
 const adminServices = require('../services/admin');
 
-export default function routes(app) {
-    app.get('/admin/', adminServices.getStore_Data);
-    app.get('/admin/create', adminServices.create_form);
+export default function routes(prefix, router) {
+    router.get(prefix + '/', adminServices.getStore_Data);
+    router.get(prefix + '/create', adminServices.create_form);
 }

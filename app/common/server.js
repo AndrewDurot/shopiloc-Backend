@@ -32,8 +32,8 @@ export default class ExpressServer {
     // });
   }
 
-  router(routes) {
-    routes(app);
+  router(prefix, routes) {
+    routes(prefix, app);
     app.use(errorHandler);
     return this;
   }

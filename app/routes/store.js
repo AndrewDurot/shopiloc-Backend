@@ -1,10 +1,11 @@
 import * as express from "express";
+
 const storeServices = require('../services/store');
 const multer = require('multer');
 const path = require('path');
 
-export default function routes(router) {
-    router.use(express.static(__dirname));
+export default function routes(prefix, app) {
+    app.use(express.static(__dirname));
     const storage = multer.diskStorage({
         destination: function (req, file, callback) {
             callback(null, './uploads')
@@ -29,10 +30,10 @@ export default function routes(router) {
         fileFilter: fileFilter
     });
 
-    router.post('/', upload.single('store_logo'), storeServices.create_store);
-    router.get('/', storeServices.get_store);
-    router.get('/Details', storeServices.get_single_store);
-    //  router.put('/', storeServices.create_store);
-    router.post('/update', storeServices.patch_store);
-    //  router.delete('/', storeServices.create_store);
+    app.post(prefix + '/', upload.single(prefix + 'store_logo'), storeServices.create_store);
+    app.get(prefix + '/', storeServices.get_store);
+    app.get(prefix + '/Details', storeServices.get_single_store);
+    //  router.put(prefix + '/', storeServices.create_store);
+    app.post(prefix + '/update', storeServices.patch_store);
+    //  router.delete(prefix + '/', storeServices.create_store);
 }
