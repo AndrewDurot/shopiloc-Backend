@@ -19,7 +19,7 @@ export default function routes(prefix, app) {
     app.get(prefix + '/Check_Url', homeServices.Check_Url);
 }
 mongoose.connect(
-    'mongodb+srv://Farukh:110581F.A@rest-6ss50.mongodb.net/test?retryWrites=true&w=majority',
+    process.env.MONGO_URI,
     {useNewUrlParser: true, useUnifiedTopology: true},
     () => console.log("Connected to db!")
 );
