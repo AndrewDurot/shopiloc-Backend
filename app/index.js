@@ -7,7 +7,7 @@ import search from './routes/search';
 import users from './routes/users';
 
 export default new Server()
-    .router('/', index)
+    .router('', index)
     .router('/users', users)
     .router('/admin', admin)
     .router('/store', store)
