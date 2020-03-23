@@ -10,7 +10,36 @@ $(document).ready(function(){
             });
         }
     });
-    
+    //debugger;
+    if(localStorage.getItem("language") != undefined && localStorage.getItem("language") != "")
+    {
+        $("#language").val(localStorage.getItem("language"));
+    } 
+    else
+    {
+        $("#language").val("en"); 
+    }  
+    $("#language").on("change", function(){
+       
+        var value = $(this).val();
+       
+        $.ajax({
+            url: '/lang',
+            data: {lang:value},
+            type: "post",
+            success : function(data)
+            {
+                localStorage.clear();
+                localStorage.setItem("language",data.language);
+                location.reload();
+                
+            },
+            error : function(jqXHR, textStatus, errorThrown)
+            {
+                console.log(textStatus);
+            }
+        })
+    })
     if(window.location.href.includes("create")){
         $.get("/country", function(data, status){
             var country_List = data.country;

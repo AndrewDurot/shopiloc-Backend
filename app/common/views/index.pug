@@ -3,21 +3,26 @@ extends layout
 block content
   
   <div class="s01">
-    <a href="/create" class="btn-search btn btn-primary"> Add my Store</a>
+    <a href="/create" class="btn-search btn btn-primary">#{language.button.create_store}</a>
+    <select class="custom-select language-select" name="Language" id="language" required>
+    <option value="">Select Language</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+    </select> 
     <form action="/" method="post">
       <fieldset>
-        <legend>Find independent shops that deliver to you!
-        <h6>Worldwide open source project to save local stores!</h6>
+        <legend> #{language.legend}  <h6> #{language.legend_placeholder} </h6>
+          
         </legend>
         
       </fieldset>
       <div class="inner-form">
         <div class="input-field first-wrap">
-          <input id="search" name="postal_code" type="text" required placeholder="Enter Postal Code ---- no spacing" />
+          <input id="search" name="postal_code" type="text" required placeholder='#{language.placeholder.postal}' />
         </div>
         <div class="input-field second-wrap">
           <select class="custom-select" name="country_list" id="countries" required>
-            <option value="">Choose Country</option>
+            <option value="">#{language.placeholder.country_list}</option>
           </select> 
         </div>
         
@@ -26,7 +31,7 @@ block content
         </div>
       </div>
     </form>
-    <a href="/about" class="btn-search btn btn-primary btn-secondry"> About / Help Shopiloc</a>
+    <a href="/about" class="btn-search btn btn-primary btn-secondry"> #{language.button.about_button}</a>
   </div>
   if isSearch
     <div class="container" id="results">

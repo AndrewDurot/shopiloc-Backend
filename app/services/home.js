@@ -1,8 +1,17 @@
 const storeModel = require('../models/store');
+const i18n = require('i18n');
 
-exports.get_store = async (req, res) => {
-    res.render('index', {title: 'Express'});
-};
+i18n.configure({
+    locales: ['en', 'ur', 'ar', 'fr'],
+    cookie: 'lang',
+    defaultLocale: 'en',
+    directory: __dirname+'/locales'
+});
+
+// exports.get_store = async (req, res) => {
+//     console.log(i18n.__('Login'));
+//     res.render('index', {title: 'Express'});
+// };
 
 function removeDuplicates(names) {
     let unique = {};
@@ -16,8 +25,10 @@ function removeDuplicates(names) {
 
 exports.get_country = async (req, res) => {
     let country_List = [];
+    console.log("here");
     const store = await storeModel.find();
-
+    console.log("here");
+    console.log(store);
     store.forEach(element => {
         country_List.push(element.country);
     });
@@ -31,6 +42,8 @@ exports.create_store = async (req, res) => {
 };
 
 exports.get_Search = async (req, res) => {
+    i18n.setLocale('fr');
+    var lang = i18n.__('home');
     try {
         console.log(req.body);
         const code = req.body.postal_code.toLowerCase();
@@ -47,7 +60,8 @@ exports.get_Search = async (req, res) => {
             result_count: store.length,
             postal_code: req.body.postal_code,
             isExist: isExist,
-            country_List: ""
+            country_List: "",
+            language: lang
         });
     } catch (err) {
         res.status(500).send(err);
