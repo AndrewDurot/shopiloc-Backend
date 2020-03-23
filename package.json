@@ -4,7 +4,7 @@
   "description": "shopiloc",
   "main": "app/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/index.js | tee -a ./log/shopiloc.log",
     "compile": "babel app --out-dir dist --delete-dir-on-start --source-maps inline --copy-files",
     "dev": "nodemon app --exec babel-node --config .nodemonrc.json | pino-pretty",
     "dev:debug": "nodemon app --exec babel-node --config .nodemonrc.json --inspect | pino-pretty",
